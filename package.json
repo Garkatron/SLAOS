@@ -1,7 +1,7 @@
 {
-    "name": "likeos",
+    "name": "slaos",
     "version": "1.0.0",
-    "description": "LikeOS - A lightweight OS-like window and process management library",
+    "description": "slaos - A lightweight OS-like window and process management library",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",

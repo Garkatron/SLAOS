@@ -3,12 +3,12 @@ import { ProcessApi } from "./process/types";
 import { WindowManager } from "./window/WindowManager";
 
 // TODO: Make a customs restricted APIs.
-export interface LikeOsApi {
+export interface slaOSApi {
     window: WindowManager;
     process: ProcessApi;
 }
 
-export class LikeOs {
+export class slaOS {
     constructor(
         readonly windowManager: WindowManager,
         readonly processManager?: ProcessManager,
