@@ -1,0 +1,27 @@
+{
+    "name": "likeos",
+    "version": "1.0.0",
+    "description": "LikeOS - A lightweight OS-like window and process management library",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc --watch"
+    },
+    "devDependencies": {
+        "typescript": "^7.0.2"
+    },
+    "keywords": ["window-manager", "process-manager", "os", "ui"],
+    "author": "",
+    "license": "ISC"
+}
