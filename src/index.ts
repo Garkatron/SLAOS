@@ -1,5 +1,5 @@
-export { LikeOs } from "./LikeOs";
-export type { LikeOsApi } from "./LikeOs";
+export { slaOS } from "./slaOS";
+export type { slaOSApi } from "./slaOS";
 
 export { ProcessManager } from "./process/ProcessManager";
 export { Process } from "./process/Process";

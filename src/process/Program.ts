@@ -1,10 +1,10 @@
 import { WindowProps } from "../window/types";
 import { ChannelsMap, UnsubscribeFn } from "../glue/types";
-import { LikeOsApi } from "../LikeOs";
 import Canvas from "../window/Canvas";
 import { WindowHandle } from "../window/types";
 import { WINDOW_DEFAULT_PROPS } from "../window/Window";
 import { LoggerFn, LoggerLevels, ProgramDiagnostic, UpdateResult } from "./types";
+import { slaOSApi } from "../slaOS";
 
 // Takes messages and mutates state;
 // E = Event
@@ -17,7 +17,7 @@ export abstract class Program<E, S> {
     log!: LoggerFn;
 
     constructor(
-        protected os: LikeOsApi
+        protected os: slaOSApi
     ){}
 
     __bindDispatch(dispatch: (event: E) => Promise<void>) {

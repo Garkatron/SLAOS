@@ -1,14 +1,14 @@
+import { slaOSApi } from "../slaOS";
 import { WindowManager } from "../window/WindowManager";
 import { Process } from "./Process";
 import { Program } from "./Program";
 import { ProgramID, ProcessID, ProcessState, ProgramMeta, LoggerFn, LoggerLevels } from "./types";
-import { LikeOsApi } from "../LikeOs";
 
 type RuntimeProgram = Program<any, any>;
 
 export class ProcessManager {
 
-    private readonly registry: Map<ProgramID, (likeOsApi: LikeOsApi) => RuntimeProgram> = new Map();
+    private readonly registry: Map<ProgramID, (likeOsApi: slaOSApi) => RuntimeProgram> = new Map();
     private readonly meta: Map<ProgramID, ProgramMeta> = new Map();
 
     private processes: Process<any>[] = [];
@@ -47,7 +47,7 @@ export class ProcessManager {
 
     registerProgram(
         meta: ProgramMeta,
-        factory: (api: LikeOsApi) => RuntimeProgram,
+        factory: (api: slaOSApi) => RuntimeProgram,
     ): ProgramID {
         const id = this.generateId();
         this.meta.set(id, meta);
@@ -79,11 +79,11 @@ export class ProcessManager {
         const process = processFactory({
             window: this.windowManager,
             process: {
-                getProcessNumberWithState: (state) => this.getProcessNumberWithState(state),
+                getProcessNumberWithState: (state: ProcessState) => this.getProcessNumberWithState(state),
                 getProgramsMeta: () => this.getProgramsMeta(),
-                spawn: (processId) => this.spawn(processId),
-                stop: (processId) => this.stop(processId),
-                log: (level, message) => this.log(level, message),
+                spawn: (programId: ProgramID) => this.spawn(programId),
+                stop: (processId: ProcessID) => this.stop(processId),
+                log: (level: LoggerLevels, message: string | any) => this.log(level, message),
             },
         });
 

@@ -1,0 +1,1 @@
+{"version":3,"file":"slaOS.js","sourceRoot":"","sources":["../src/slaOS.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,0BAA0B,CAAC;AAU1D,MAAM,OAAO,KAAK;IAED,aAAa;IACb,cAAc;IAF3B,YACa,aAA4B,EAC5B,cAA+B;6BAD/B,aAAa;8BACb,cAAc;QAEvB,IAAI,CAAC,cAAc,GAAG,IAAI,cAAc,CAAC,IAAI,CAAC,aAAa,CAAC,CAAC;IACjE,CAAC;CACJ"}
