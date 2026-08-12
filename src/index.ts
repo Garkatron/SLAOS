@@ -10,10 +10,11 @@ export type {
     UpdateResult,
     ProgramDiagnostic,
     ProcessState,
-    ProgramMeta,
+    ProgramDefinition as ProgramMeta,
     ProcessApi,
     LoggerLevels,
     LoggerFn,
+    Task,
 } from "./process/types";
 
 export { WindowManager } from "./window/WindowManager";
@@ -29,7 +30,7 @@ export type {
     RenderCallback,
     WindowCallbacks,
     WindowControls,
-    CanvasRenderer,
+    RendererAdapter as CanvasRenderer,
 } from "./window/types";
 
 export { default as Channel } from "./glue/Channel";

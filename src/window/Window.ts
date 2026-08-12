@@ -55,7 +55,7 @@ export class WindowInstance<P extends WindowProps> {
         private frame: HTMLElement,
         private content: HTMLElement,
         public windowProps: P,
-        private canvas: Canvas<any, any, any>,
+        private canvas: Canvas<any, any>,
     ) {}
 
     api(): WindowHandle {
@@ -200,10 +200,8 @@ export class WindowInstance<P extends WindowProps> {
         this.unsub = undefined;
     }
 
-
-
     render(parent: HTMLElement = this.content, state: any) {
-        this.canvas.renderer?.mount(parent, this.canvas.view(state));
+        this.canvas.view(parent, state)
     }
 
     isOpen(): boolean {

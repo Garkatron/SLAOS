@@ -13,7 +13,7 @@ export class WindowManager {
         this.windowsContainer = windowsContainer;
     }
 
-    async spawn<P extends WindowProps>(window: Canvas<any, any, any>, windowProps: P): Promise<WindowHandle> {
+    async spawn<P extends WindowProps>(window: Canvas<any, any>, windowProps: P): Promise<WindowHandle> {
         const frameParts = this.windowFrameFactory<P>(windowProps);
         const { frame, getContent, ready } = frameParts;
 

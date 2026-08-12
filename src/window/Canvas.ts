@@ -1,5 +1,5 @@
 import { ChannelsMap } from "../glue/types";
-import { CanvasRenderer } from "./types";
+import { RendererAdapter } from "./types";
 
 
 
@@ -8,13 +8,12 @@ import { CanvasRenderer } from "./types";
 // E = Event
 // S = State
 // V = View
-export default abstract class Canvas<C extends ChannelsMap, S,  V> {
+export default abstract class Canvas<C extends ChannelsMap, S> {
 
     abstract channels: C;
-    readonly abstract renderer: CanvasRenderer<V>
 
     // Makes the view that will be renderer inside the target.
-    abstract view(state: S): V;
+    abstract view(element: HTMLElement, state: S): void;
 }
 /*
 export abstract class Window<S = unknown, V = unknown> {

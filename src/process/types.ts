@@ -1,3 +1,6 @@
+import { slaOSApi } from "../slaOS";
+import { Program } from "./Program";
+
 export type ProgramID = `${string}-${string}`;
 export type ProcessID = number;
 
@@ -22,19 +25,18 @@ export enum ProcessState {
     Terminated = "terminated",
 }
 
-export interface ProgramMeta {
+export interface ProgramDefinition {
     name: string;
     version: string;
     description?: string;
     lastUpdate?: Date;
+    factory: (api: slaOSApi) => Program<any, any>
 }
 
 export interface ProcessApi {
-    log: LoggerFn;
     spawn(processId: ProgramID): Promise<ProcessID>;
     stop(processId: ProcessID): Promise<void>;
-    getProgramsMeta(): Map<ProgramID, ProgramMeta>;
-    getProcessNumberWithState(state: ProcessState): string[]
+
 }
 
 export type LoggerLevels = "debug" | "info" | "error" | "warning";

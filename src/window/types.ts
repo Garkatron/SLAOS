@@ -16,8 +16,8 @@ type WindowsEventBase = { type: WindowsEventKind };
 type WindowsEventKind = "open" | "close" | "hide" | "show" | "resize" | "move";
 
 export type WindowHandle = {
-    id: number,
-    render: <S>(state: S) => void,
+    id: number;
+    render: <S>(state: S) => void;
     close: () => void;
     openWindow: () => void;
     isOpen: () => boolean;
@@ -28,7 +28,7 @@ export type WindowHandle = {
     setVisibility: (v: "visible" | "hidden") => void;
     toggleVisibility: () => void;
     setCallbacks: (c: WindowCallbacks) => void;
-    getChannels: <C extends ChannelsMap>() => C
+    getChannels: <C extends ChannelsMap>() => C;
 };
 
 export type WindowsEvent =
@@ -77,7 +77,7 @@ export interface WindowControls {
     maximize: HTMLElement;
 }
 
-export interface CanvasRenderer<T = unknown> {
-  mount(parent: HTMLElement, view: T): void;
-  unmount(parent: HTMLElement): void;
+export interface RendererAdapter<T> {
+    mount(parent: HTMLElement, view: T): void;
+    unmount(parent: HTMLElement): void;
 }

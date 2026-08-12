@@ -3,27 +3,27 @@ import { ChannelsMap, UnsubscribeFn } from "../glue/types";
 import Canvas from "../window/Canvas";
 import { WindowHandle } from "../window/types";
 import { WINDOW_DEFAULT_PROPS } from "../window/Window";
-import { LoggerFn, LoggerLevels, ProgramDiagnostic, UpdateResult } from "./types";
+import {
+    LoggerFn,
+    LoggerLevels,
+    ProgramDiagnostic,
+    UpdateResult,
+} from "./types";
 import { slaOSApi } from "../slaOS";
 
 // Takes messages and mutates state;
 // E = Event
 // S = State
 export abstract class Program<E, S> {
-    private _dispatch!: (event: E) => Promise<void>;
+    private dispatchFn!: (event: E) => Promise<void>;
     private windowUnsubs = new Map<WindowHandle, UnsubscribeFn[]>();
     private windows: WindowHandle[] = [];
 
-    log!: LoggerFn;
+    constructor(protected os: slaOSApi) {}
 
-    constructor(
-        protected os: slaOSApi
-    ){}
-
-    __bindDispatch(dispatch: (event: E) => Promise<void>) {
-        this._dispatch = dispatch;
+    setDispatch(dispatch: (event: E) => Promise<void>) {
+        this.dispatchFn = dispatch;
     }
-
 
     render(state: S): void {
         for (const handle of this.windows) {
@@ -31,12 +31,12 @@ export abstract class Program<E, S> {
         }
     }
     protected dispatch(event: E): Promise<void> {
-        return this._dispatch(event);
+        return this.dispatchFn(event);
     }
 
-    protected async spawnWindow<C extends ChannelsMap, V, P extends WindowProps>(
-        canvas: Canvas<C, S, V>,
-        windowProps: P
+    protected async spawnWindow<C extends ChannelsMap, P extends WindowProps>(
+        canvas: Canvas<C, S>,
+        windowProps: P,
     ): Promise<WindowHandle> {
         const handle = await this.os.window.spawn(canvas, windowProps);
         this.windows.push(handle);
@@ -63,15 +63,3 @@ export abstract class Program<E, S> {
     abstract onStop(): Promise<ProgramDiagnostic>;
     abstract update(event: E, state: S): Promise<UpdateResult<E, S>>;
 }
-/*
-export abstract class Program {
-
-    windowManager?: WindowManager;
-
-    abstract onStart(): ProcessResult;
-    abstract onStop(): ProcessResult;
-    abstract onPause(): ProcessResult;
-    abstract onResume(): ProcessResult;
-    abstract onWork(work: DispatchedWork): ProcessResult;
-}
-*/
