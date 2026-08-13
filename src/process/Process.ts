@@ -1,7 +1,5 @@
 import { Program } from "./Program";
 import {
-    LoggerFn,
-    LoggerLevels,
     ProcessID,
     ProcessState,
     ProgramDiagnostic,

@@ -36,18 +36,4 @@ export interface ProgramDefinition {
 export interface ProcessApi {
     spawn(processId: ProgramID): Promise<ProcessID>;
     stop(processId: ProcessID): Promise<void>;
-
 }
-
-export type LoggerLevels = "debug" | "info" | "error" | "warning";
-export type LoggerFn = (level: LoggerLevels, message: string | any) => void;
-
-// export type ProcessResult = Promise<ProcessInfo<void>> | ProcessInfo<void>;
-/* export interface ProcessInfo<T> {
-    result: "failure" | "success";
-    message: string;
-    data?: T;
-};
-
-export type DispatchedWork = unknown;
-*/

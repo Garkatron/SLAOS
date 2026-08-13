@@ -4,8 +4,6 @@ import Canvas from "../window/Canvas";
 import { WindowHandle } from "../window/types";
 import { WINDOW_DEFAULT_PROPS } from "../window/Window";
 import {
-    LoggerFn,
-    LoggerLevels,
     ProgramDiagnostic,
     UpdateResult,
 } from "./types";
@@ -30,6 +28,7 @@ export abstract class Program<E, S> {
             handle.render(state);
         }
     }
+
     protected dispatch(event: E): Promise<void> {
         return this.dispatchFn(event);
     }
