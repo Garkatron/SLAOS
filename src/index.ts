@@ -1,7 +1,8 @@
 export { slaOS } from "./slaOS";
 export type { slaOSApi } from "./slaOS";
 
-export { ProcessManager } from "./process/ProcessManager";
+export { default as ProcessManager } from "./process/ProcessManager";
+export { default as ProgramManager } from "./process/ProgramManager";
 export { Process } from "./process/Process";
 export { Program } from "./process/Program";
 export type {
@@ -10,7 +11,7 @@ export type {
     UpdateResult,
     ProgramDiagnostic,
     ProcessState,
-    ProgramDefinition as ProgramMeta,
+    ProgramDefinition,
     ProcessApi,
     LoggerLevels,
     LoggerFn,
@@ -30,7 +31,7 @@ export type {
     RenderCallback,
     WindowCallbacks,
     WindowControls,
-    RendererAdapter as CanvasRenderer,
+    RendererAdapter,
 } from "./window/types";
 
 export { default as Channel } from "./glue/Channel";

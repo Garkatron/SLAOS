@@ -1,9 +1,9 @@
 import { WindowManager } from "../window/WindowManager";
 import { Process } from "./Process";
-import { ProgramManager } from "./ProgramManager";
+import ProgramManager from "./ProgramManager";
 import { ProgramID, ProcessID } from "./types";
 
-export class ProcessManager {
+export default class ProcessManager {
     private readonly processes: Map<ProcessID, Process<any>> = new Map();
     private nextId: ProcessID = 0;
 

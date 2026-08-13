@@ -1,5 +1,5 @@
-import { ProcessManager } from "./process/ProcessManager";
-import { ProgramManager } from "./process/ProgramManager";
+import ProcessManager from "./process/ProcessManager";
+import ProgramManager from "./process/ProgramManager";
 import { ProcessApi } from "./process/types";
 import { WindowManager } from "./window/WindowManager";
 

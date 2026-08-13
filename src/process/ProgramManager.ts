@@ -1,7 +1,7 @@
 import { Program } from "./Program";
 import { ProgramID, ProgramDefinition } from "./types";
 
-export class ProgramManager {
+export default class ProgramManager {
     private readonly programs = new Map<ProgramID, ProgramDefinition>();
 
     registerProgram(def: ProgramDefinition): ProgramID {
