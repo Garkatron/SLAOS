@@ -1,20 +1,14 @@
 import ProcessManager from "./process/ProcessManager";
-import ProgramManager from "./process/ProgramManager";
-import { ProcessApi } from "./process/types";
+import ProgramManager from "./program/ProgramManager";
 import { WindowManager } from "./window/WindowManager";
 
-// TODO: Make a customs restricted APIs.
-export interface slaOSApi {
-    window: WindowManager;
-    process: ProcessApi;
-}
+export default class SlaOS {
 
-export class slaOS {
     constructor(
-        readonly windowManager: WindowManager,
-        readonly programManager: ProgramManager,
-        readonly processManager?: ProcessManager,
+        public window: WindowManager,
+        public program: ProgramManager,
+        public process?: ProcessManager,
     ) {
-        this.processManager = new ProcessManager(this.programManager, this.windowManager);
+        this.process = new ProcessManager(this.program);
     }
 }

@@ -1,23 +1,32 @@
-import Canvas from "./Canvas";
-import { FrameParts, WindowHandle, WindowControls, WindowProps, WindowInstanceId } from "./types";
-import { WindowInstance } from "./Window";
+import { View } from "../types";
+import { Window } from "./Window";
+import { FrameParts, WindowID, WindowProps } from "./types";
 
 export class WindowManager {
-    instances: WindowInstance<any>[] = [];
-    nextId: WindowInstanceId = 0;
+    private instances: Window<any, any>[] = [];
+    private nextId: WindowID = 0;
 
     constructor(
         private windowsContainer: HTMLElement,
-        private windowFrameFactory: <P extends WindowProps>(props: P) => FrameParts,
-    ) {
-        this.windowsContainer = windowsContainer;
-    }
+        private windowFrameFactory: <P extends WindowProps>(
+            props: P,
+        ) => FrameParts,
+    ) {}
 
-    async spawn<P extends WindowProps>(window: Canvas<any, any>, windowProps: P): Promise<WindowHandle> {
+    async spawn<P extends WindowProps, M>(
+        viewImpl: View<M>,
+        windowProps: P,
+    ): Promise<Window<P, M>> {
         const frameParts = this.windowFrameFactory<P>(windowProps);
         const { frame, getContent, ready } = frameParts;
 
-        const instance = new WindowInstance(this.nextId, frame, document.createElement("div"), windowProps, window);
+        const instance = new Window<P, M>(
+            this.nextId,
+            frame,
+            document.createElement("div"),
+            windowProps,
+            viewImpl,
+        );
         this.instances.push(instance);
         this.nextId++;
 
@@ -26,22 +35,27 @@ export class WindowManager {
         instance.setContent(getContent());
         instance.setControls(controls);
 
-        return instance.api();
+        return instance;
     }
 
-    getWindow(id: WindowInstanceId): WindowHandle | undefined {
-        return this.instances.find((i) => i.id() === id)?.api();
+    getWindow(id: WindowID): Window<any, any> | undefined {
+        return this.instances.find((i) => i.id === id);
     }
 
-    getWindows(): WindowHandle[] {
-        return this.instances.map((i) => i.api());
+    getWindows(): Window<any, any>[] {
+        return [...this.instances];
     }
 
-    kill(instance: WindowInstance<any>) {
+    kill(instance: Window<any, any>): void {
         const index = this.instances.indexOf(instance);
         if (index !== -1) {
-            instance.detachSignal();
+            instance.close();
             this.instances.splice(index, 1);
         }
+    }
+
+    killById(id: WindowID): void {
+        const instance = this.getWindow(id);
+        if (instance) this.kill(instance);
     }
 }

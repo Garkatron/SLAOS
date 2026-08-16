@@ -1,49 +1,31 @@
-export { slaOS } from "./slaOS";
-export type { slaOSApi } from "./slaOS";
+import SlaOS from "./slaOS";
 
+export { Channel, ChannelsMap, EventsOf, UnsubscribeFn } from "./channel/Channel";
+export { default as Process } from "./process/Process";
+export { ProcessState } from "./process/Process";
+export { default as Program } from "./program/Program";
+export { default as ProgramManager } from "./program/ProgramManager";
 export { default as ProcessManager } from "./process/ProcessManager";
-export { default as ProgramManager } from "./process/ProgramManager";
-export { Process } from "./process/Process";
-export { Program } from "./process/Program";
-export type {
-    ProgramID,
-    ProcessID,
-    UpdateResult,
-    ProgramDiagnostic,
-    ProcessState,
-    ProgramDefinition,
-    ProcessApi,
-    LoggerLevels,
-    LoggerFn,
-    Task,
-} from "./process/types";
-
+export { Task } from "./program/Task";
+export { Window } from "./window/Window";
 export { WindowManager } from "./window/WindowManager";
-export { WindowInstance, WINDOW_DEFAULT_PROPS } from "./window/Window";
-export { default as Canvas } from "./window/Canvas";
+export { default as SlaOS } from "./slaOS";
 export type {
-    WindowVisibility,
-    WindowInstanceId,
-    WindowSizeState,
-    FrameParts,
-    WindowHandle,
+    WindowID,
     WindowProps,
-    RenderCallback,
     WindowCallbacks,
     WindowControls,
-    RendererAdapter,
+    WindowVisibility,
+    WindowSizeState,
+    FrameParts,
 } from "./window/types";
-
-export { default as Channel } from "./glue/Channel";
 export type {
-    EventMap,
-    UpdateFn,
-    ChannelUpdateFn,
-    UnsubscribeFn,
-    EventMapFromUnion,
-    ChannelsMap,
-    EventsOf,
-} from "./glue/types";
-
-export type { Signal } from "./signal";
-export { signal } from "./signal";
+    ProcessID,
+    ProgramID,
+    ProgramDefinition,
+    ProcessHandle,
+    DispatchFn,
+    Init,
+    Update,
+    View,
+} from "./types";
